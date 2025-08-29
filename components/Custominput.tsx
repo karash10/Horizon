@@ -1,32 +1,40 @@
-import { FormControl, FormField, FormLabel, FormMessage } from './ui/form'
-import { Input } from './ui/input'
+// 1. Import 'useId' from React
+import { useId } from 'react';
+import { FormControl, FormField, FormLabel, FormMessage } from './ui/form';
+import { Input } from './ui/input';
 
-import { authFormSchema } from '@/lib/utils'
-import { Control, FieldPath } from 'react-hook-form'
-import { z } from 'zod'
+import { authFormSchema } from '@/lib/utils';
+import { Control, FieldPath } from 'react-hook-form';
+import { z } from 'zod';
 
-const formSchema = authFormSchema('sign-up')
+const formSchema = authFormSchema('sign-up');
 
-interface CustomInput {
-  control: Control<z.infer<typeof formSchema>>,
-  name: FieldPath<z.infer<typeof formSchema>>,
-  label: string,
-  placeholder: string
+interface CustomInputProps { // Renamed interface to avoid conflict with component name
+  control: Control<z.infer<typeof formSchema>>;
+  name: FieldPath<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
 }
 
-const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
+const CustomInput = ({ control, name, label, placeholder }: CustomInputProps) => {
+  // 2. Generate a unique, stable ID for this input
+  const id = useId();
+
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
         <div className="form-item">
-          <FormLabel className="form-label">
+          {/* 3. Use the ID to link the label to the input */}
+          <FormLabel htmlFor={id} className="form-label">
             {label}
           </FormLabel>
           <div className="flex w-full flex-col">
             <FormControl>
-              <Input 
+              <Input
+                // 4. Assign the unique ID to the input element
+                id={id}
                 placeholder={placeholder}
                 className="input-class"
                 type={name === 'password' ? 'password' : 'text'}
@@ -38,7 +46,7 @@ const CustomInput = ({ control, name, label, placeholder }: CustomInput) => {
         </div>
       )}
     />
-  )
-}
+  );
+};
 
-export default CustomInput
+export default CustomInput;
