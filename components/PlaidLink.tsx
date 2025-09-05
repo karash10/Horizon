@@ -1,8 +1,9 @@
-import { createLinkToken, exchangePublicToken } from "@/lib/actions/user.actions"
-import { useRouter } from "next/router"
-import { useCallback, useEffect, useState } from "react"
-import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from "react-plaid-link"
-import { Button } from "./ui/button"
+"use client";
+import { createLinkToken, exchangePublicToken } from "@/lib/actions/user.actions";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from "react-plaid-link";
+import { Button } from "./ui/button";
 
 const PlaidLink = ({user,variant}:PlaidLinkProps) => {
     const router = useRouter();
@@ -43,22 +44,22 @@ const PlaidLink = ({user,variant}:PlaidLinkProps) => {
         </Button>
       ): variant === 'ghost' ? (
         <Button onClick={() => open()} variant="ghost" className="plaidlink-ghost">
-          <Image 
+          {/* <Image 
             src="/icons/connect-bank.svg"
             alt="connect bank"
             width={24}
             height={24}
-          />
+          /> */}
           <p className='hiddenl text-[16px] font-semibold text-black-2 xl:block'>Connect bank</p>
         </Button>
       ): (
         <Button onClick={() => open()} className="plaidlink-default">
-          <Image 
+          {/* <Image 
             src="/icons/connect-bank.svg"
             alt="connect bank"
             width={24}
             height={24}
-          />
+          /> */}
           <p className='text-[16px] font-semibold text-black-2'>Connect bank</p>
         </Button>
       )}
