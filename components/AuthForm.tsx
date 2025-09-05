@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CustomInput from './Custominput';
+import PlaidLink from './PlaidLink';
 // import PlaidLink from './PlaidLink';
 
 const AuthForm =  ({ type }: { type: string }) => {
@@ -116,7 +117,7 @@ const AuthForm =  ({ type }: { type: string }) => {
       </header>
       {user ? (
         <div className="flex flex-col gap-4">
-          {/* <PlaidLink user={user} variant="primary" /> */}
+          <PlaidLink user={user} variant="primary" />
         </div>
       ): (
         <>
